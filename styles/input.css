@@ -1,0 +1,235 @@
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  font-style: normal;
+  font-weight: 400 800;
+  font-display: block;
+  src: url('fonts/plus-jakarta-latin-v12.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Caveat';
+  font-style: normal;
+  font-weight: 600 700;
+  font-display: block;
+  src: url('fonts/caveat-latin-v23.woff2') format('woff2');
+}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+    body {
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    }
+    .font-hand {
+      font-family: 'Caveat', cursive;
+    }
+    .gradient-text {
+      background: linear-gradient(135deg, #1e293b 0%, #2563eb 50%, #4f46e5 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    section[id] {
+      scroll-margin-top: 5rem;
+    }
+    #heroSection .hero-heading {
+      text-wrap: balance;
+      letter-spacing: -0.045em;
+      font-size: clamp(2.125rem, 5.6vw, 3rem);
+      line-height: 1.08;
+    }
+    .hero-opening {
+      font-size: 0.78em;
+      letter-spacing: -0.035em;
+    }
+    .hero-photo {
+      box-shadow: 0 24px 64px -28px rgb(15 23 42 / 0.4);
+      isolation: isolate;
+    }
+    .hero-photo img {
+      height: 340px;
+      object-position: 60% center;
+    }
+    .hero-formula {
+      background: rgb(15 23 42 / 0.82);
+      backdrop-filter: blur(16px);
+    }
+    @media (min-width: 1024px) {
+      #heroSection .hero-grid {
+        grid-template-columns: minmax(0, 1.18fr) minmax(0, 1fr);
+        gap: 3rem;
+      }
+      #heroSection .hero-heading {
+        font-size: clamp(3rem, 4.3vw, 4rem);
+      }
+      .hero-photo img {
+        height: 390px;
+      }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html.scroll-smooth {
+        scroll-behavior: auto;
+      }
+      .hero-photo img {
+        transition: none;
+        transform: none;
+      }
+    }
+    .whatsapp-icon {
+      flex-shrink: 0;
+    }
+    .batch-short {
+      display: none;
+    }
+    header a.brand-lockup {
+      gap: 0.25rem;
+    }
+    #mobileMenuToggleBtn, .batch-cta, .mobile-nav-link {
+      min-height: 44px;
+    }
+    #mobileMenuDrawer {
+      max-height: calc(100dvh - 5rem);
+      overflow-y: auto;
+    }
+    @media (max-width: 1023px) {
+      #heroSection .hero-photo {
+        max-width: 560px;
+        margin-inline: auto;
+      }
+      .value-pillars > div {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.625rem;
+      }
+    }
+    @media (max-width: 639px) {
+      .announcement-bar > div {
+        flex-wrap: nowrap;
+      }
+      .announcement-bar .announcement-label {
+        font-size: 10px;
+      }
+      .announcement-contact > span {
+        display: none;
+      }
+      .announcement-contact a {
+        white-space: nowrap;
+      }
+      #heroSection {
+        padding-top: 2rem;
+      }
+      #heroSection .hero-heading {
+        font-size: clamp(2rem, 9.8vw, 2.5rem);
+      }
+      #heroSection .hero-copy > * + * {
+        margin-top: 1.25rem;
+      }
+      #heroSection .hero-copy > p {
+        font-size: 15px;
+        line-height: 1.65;
+      }
+      #heroSection .hero-actions {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+      }
+      #heroSection .hero-actions a {
+        min-height: 48px;
+      }
+      #heroSection .hero-photo img {
+        height: clamp(260px, 80vw, 340px);
+      }
+      .value-pillars > div {
+        padding: 0.875rem;
+      }
+      .value-pillars h4 {
+        font-size: 13px;
+        line-height: 1.4;
+      }
+      .value-pillars p {
+        font-size: 12px;
+        line-height: 1.5;
+        margin-top: 0.25rem;
+      }
+      section h2 {
+        text-wrap: balance;
+      }
+      #programsSection .program-card {
+        padding: 1.25rem;
+      }
+      #programsSection .program-meta {
+        flex-wrap: wrap;
+        justify-content: flex-start;
+      }
+      #programsSection .program-footer {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      #programsSection .program-footer a {
+        justify-content: center;
+        min-height: 48px;
+      }
+      .bug-toolbar > div {
+        min-width: 0;
+      }
+      .bug-toolbar .lab-address {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      #bugLabSection .bug-target-btn[data-bug-id="calc"],
+      #bugLabSection .bug-target-btn[data-bug-id="date"] {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.75rem;
+      }
+      #bugLabSection .bug-target-btn > div {
+        text-align: left;
+      }
+      #toastNotification {
+        left: 1rem;
+        right: 1rem;
+        max-width: none;
+      }
+      #closeToastBtn {
+        min-width: 44px;
+        min-height: 44px;
+      }
+    }
+    @media (max-width: 479px) {
+      header > div:first-child {
+        gap: 0.5rem;
+      }
+      header a[href="#heroSection"] {
+        gap: 0.25rem;
+      }
+      .academy-label {
+        display: none;
+      }
+      .batch-cta {
+        padding: 0.625rem;
+        white-space: nowrap;
+      }
+    }
+    @media (max-width: 359px) {
+      .batch-long {
+        display: none;
+      }
+      .batch-short {
+        display: inline;
+      }
+    }
+
+.navigation-row { height: 80px; }
+header a.brand-lockup { display: flex; flex-direction: column; gap: 0; }
+.brand-wordmark { display: block; width: 160px; height: auto; }
+.brand-tagline { width: 100%; font-size: 10px; line-height: 14px; font-weight: 500; color: #64748b; white-space: nowrap; text-align: center; }
+@media (max-width: 639px) {
+  .navigation-row { height: 64px; }
+  .brand-wordmark { width: 128px; }
+  .brand-tagline { display: none; }
+}
+
+#batchInquiryForm .grid > div { min-width: 0; }
+@media (max-width: 639px) {
+  #enrollSection .enquiry-panel, #batchInquiryForm, #enrollSection .community-card { padding: 1rem; }
+  #batchInquiryForm input, #batchInquiryForm select { min-width: 0; min-height: 48px; font-size: 16px; }
+  #batchInquiryForm .enquiry-actions { display: grid; grid-template-columns: minmax(0, 1fr); }
+  #batchInquiryForm button { justify-content: center; min-height: 48px; }
+}
