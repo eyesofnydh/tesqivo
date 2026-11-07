@@ -10,7 +10,7 @@ if (dirname(output) !== resolve(root) || basename(output) !== 'dist') {
 await rm(output, { recursive: true, force: true });
 await mkdir('dist/assets', { recursive: true });
 await copyFile('index.html', 'dist/index.html');
-for (const file of ['site.css', 'tesqivo-wordmark-transparent-web.png', 'tesqivo-symbol-transparent.png', 'favicon.png', 'hero-optimized.jpg']) {
+for (const file of ['site.css', 'tesqivo-wordmark-transparent-web.png', 'tesqivo-symbol-transparent.png', 'favicon.png', 'hero-optimized.jpg', 'whatsapp-group-qr.png']) {
   await copyFile(`assets/${file}`, `dist/assets/${file}`);
 }
 await cp('assets/fonts', 'dist/assets/fonts', { recursive: true });
