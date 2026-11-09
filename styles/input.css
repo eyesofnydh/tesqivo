@@ -233,3 +233,22 @@ header a.brand-lockup { display: flex; flex-direction: column; gap: 0; }
   #batchInquiryForm .enquiry-actions { display: grid; grid-template-columns: minmax(0, 1fr); }
   #batchInquiryForm button { justify-content: center; min-height: 48px; }
 }
+
+/* Continuous testimonial strip; duplicate group provides a seamless loop. */
+.testimonial-carousel { overflow: hidden; }
+.testimonial-track { display: flex; width: max-content; animation: testimonial-drift 65s linear infinite; }
+.testimonial-group { display: flex; align-items: stretch; gap: 1.25rem; padding: 0.25rem 1.25rem 0.75rem 0; }
+.testimonial-card { width: 340px; margin: 0; flex: 0 0 auto; }
+.testimonial-card > div:first-child { flex-wrap: wrap; }
+.testimonial-stars { color: #a16207; font-size: 1.125rem; letter-spacing: 0.05em; white-space: nowrap; }
+.testimonial-star-empty { color: #64748b; }
+.testimonial-carousel:hover .testimonial-track,
+.testimonial-carousel:focus-within .testimonial-track { animation-play-state: paused; }
+
+@keyframes testimonial-drift { to { transform: translateX(-50%); } }
+@media (max-width: 639px) { .testimonial-card { width: min(300px, calc(100vw - 3rem)); } }
+@media (prefers-reduced-motion: reduce) {
+  .testimonial-carousel { overflow-x: auto; }
+  .testimonial-track { animation: none; }
+  .testimonial-group[aria-hidden="true"] { display: none; }
+}
