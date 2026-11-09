@@ -11,7 +11,8 @@ await rm(output, { recursive: true, force: true });
 await mkdir('dist/assets', { recursive: true });
 await copyFile('index.html', 'dist/index.html');
 await copyFile('assets/booking-calendar.js', 'dist/assets/booking-calendar.js');
-for (const file of ['site.css', 'tesqivo-wordmark-transparent-web.png', 'tesqivo-symbol-transparent.png', 'favicon.png', 'hero-optimized.jpg', 'whatsapp-group-qr.png']) {
+await copyFile('assets/site-loading.js', 'dist/assets/site-loading.js');
+for (const file of ['site.css', 'tesqivo-wordmark-transparent-web.png', 'tesqivo-symbol-transparent.png', 'favicon.png', 'qa-testing-hero.jpg', 'qa-testing-hero-small.jpg', 'whatsapp-group-qr.png']) {
   await copyFile(`assets/${file}`, `dist/assets/${file}`);
 }
 await cp('assets/fonts', 'dist/assets/fonts', { recursive: true });
