@@ -665,10 +665,10 @@
             <span>🐞 Test Your QA Instincts</span>
           </div>
           <h2 class="text-2xl sm:text-2xl sm:text-3xl font-extrabold text-slate-900 leading-tight">
-            Think Like a Tester - Can You Spot 3 Flaws in This Checkout?
+            Think Like a Tester: Bug, Typo, or Working as Expected?
           </h2>
           <p class="text-sm text-slate-600 leading-relaxed">
-            Testing isn't about memorizing code; it's about spotting when software doesn't make sense. Click on the <strong>3 suspicious elements</strong> inside this mock order screen to see what real QA work feels like:
+            Find <strong>3 functional bugs</strong> in this mock checkout, then look closer: there's a spelling mistake and a detail that works exactly as intended. Click the items to find out why each one matters.
           </p>
 
           <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200">
@@ -679,8 +679,9 @@
             <div class="w-full h-2.5 bg-slate-200 rounded-full overflow-hidden">
               <div id="bugProgressBar" class="h-full bg-blue-600 transition-all duration-300" style="width: 0%"></div>
             </div>
-            <p id="bugFeedbackText" class="text-xs text-slate-600 mt-3 leading-relaxed">
-              💡 <strong>Hint:</strong> Check the item math calculation, the selected delivery date, and the red payment button text.
+            <p id="labReviewCounter" class="text-xs text-slate-600 mt-3">Bonus details reviewed: 0 / 2</p>
+            <p id="bugFeedbackText" role="status" aria-live="polite" class="text-xs text-slate-600 mt-3 leading-relaxed">
+              💡 <strong>Hint:</strong> Check the item math, delivery date, and payment button. Then inspect the delivery wording and guest checkout.
             </p>
             <button
               type="button"
@@ -701,14 +702,14 @@
                 <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
                 <span class="lab-address ml-2 font-mono text-[11px] text-slate-400">https://tesqivo-lab.internal/checkout</span>
               </div>
-              <span class="hidden sm:inline text-[11px] bg-slate-700 px-2 py-0.5 rounded text-blue-300">Click suspicious items</span>
+              <span class="hidden sm:inline text-[11px] bg-slate-700 px-2 py-0.5 rounded text-blue-300">Inspect the details</span>
             </div>
 
             <div class="p-5 sm:p-6 bg-white space-y-4">
               <div class="flex items-center justify-between border-b border-slate-100 pb-3">
                 <div>
                   <h3 class="font-bold text-slate-800 text-sm">QuickCart Express Checkout</h3>
-                  <p class="text-xs text-slate-500">Order #QC-8821 • Guest Session</p>
+                  <p class="text-xs text-slate-500">Order #QC-8821 • Demo checkout</p>
                 </div>
                 <span class="text-xs font-medium px-2 py-0.5 rounded bg-slate-100 text-slate-600">INR (₹)</span>
               </div>
@@ -744,6 +745,18 @@
                   <div class="text-[10px] text-slate-400 mt-0.5">Click if this looks wrong</div>
                 </div>
               </button>
+
+              <!-- Bonus observations: a content issue and expected behaviour. -->
+              <div class="lab-observations">
+                <button type="button" data-observation-id="typo" aria-pressed="false" class="lab-observation-btn">
+                  <span class="lab-observation-label">Delivary instructions</span>
+                  <span class="lab-observation-detail">Leave the package at reception.</span>
+                </button>
+                <button type="button" data-observation-id="guest" aria-pressed="false" class="lab-observation-btn">
+                  <span class="lab-observation-label">Guest checkout</span>
+                  <span class="lab-observation-detail">No account required. Your receipt goes to your email.</span>
+                </button>
+              </div>
 
               <!-- Target 3: Dangerous Button Copy -->
               <div class="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
@@ -1107,6 +1120,19 @@
 
       // Interactive Bug Hunt Lab
       var discoveredBugs = {};
+      var reviewedDetails = {};
+      var observationDetails = {
+        typo: {
+          title: 'Content issue: a spelling mistake',
+          explanation: '"Delivary" should be "Delivery". The checkout can still work, but the wording needs correcting. Log it as a content defect, separate from a functional failure.',
+          result: 'content'
+        },
+        guest: {
+          title: 'Working as expected: guest checkout',
+          explanation: 'This checkout explicitly allows purchases without an account and sends the receipt by email. No sign-in is required here, so this is expected behaviour. Check the requirement before reporting a bug.',
+          result: 'expected'
+        }
+      };
       var bugDetails = {
         calc: {
           title: 'Bug #1: Calculation Defect (High Severity)',
@@ -1132,10 +1158,12 @@
           feedbackEl.innerHTML = '<strong class="text-emerald-700">✓ ' + bugDetails[lastBugKey].title + ':</strong> ' + bugDetails[lastBugKey].explanation;
         }
         if (count === 3) {
-          feedbackEl.innerHTML += ' <strong class="text-blue-700 block mt-1">🎉 Awesome! You spotted all 3 bugs - you already have the natural QA mindset!</strong>';
+          feedbackEl.innerHTML += Object.keys(reviewedDetails).length === 2
+            ? ' <strong class="text-blue-700 block mt-1">Challenge complete: 3 functional bugs, 1 content issue, and 1 expected behaviour reviewed.</strong>'
+            : ' <strong class="text-blue-700 block mt-1">All 3 functional bugs found! Review the two bonus details to practise telling a content issue from expected behaviour.</strong>';
         }
         var resetBtn = document.getElementById('resetBugLabBtn');
-        if (count > 0) {
+        if (count > 0 || Object.keys(reviewedDetails).length > 0) {
           resetBtn.classList.remove('hidden');
         } else {
           resetBtn.classList.add('hidden');
@@ -1143,20 +1171,45 @@
       }
 
       document.querySelectorAll('.bug-target-btn').forEach(function (btn) {
+        btn.setAttribute('aria-pressed', 'false');
         btn.addEventListener('click', function () {
           var bugId = btn.getAttribute('data-bug-id');
           discoveredBugs[bugId] = true;
+          btn.setAttribute('aria-pressed', 'true');
           btn.classList.add('ring-2', 'ring-emerald-500', 'bg-emerald-50/70');
           updateBugLab(bugId);
         });
       });
 
+      document.querySelectorAll('.lab-observation-btn').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var observationId = btn.getAttribute('data-observation-id');
+          var detail = observationDetails[observationId];
+          reviewedDetails[observationId] = true;
+          btn.setAttribute('aria-pressed', 'true');
+          btn.setAttribute('data-result', detail.result);
+          document.getElementById('labReviewCounter').textContent = 'Bonus details reviewed: ' + Object.keys(reviewedDetails).length + ' / 2';
+          document.getElementById('bugFeedbackText').innerHTML = '<strong class="block mb-1">' + detail.title + '</strong>' + detail.explanation;
+          document.getElementById('resetBugLabBtn').classList.remove('hidden');
+          if (Object.keys(discoveredBugs).length === 3 && Object.keys(reviewedDetails).length === 2) {
+            document.getElementById('bugFeedbackText').innerHTML += ' <strong class="text-blue-700 block mt-1">Challenge complete: 3 functional bugs, 1 content issue, and 1 expected behaviour reviewed.</strong>';
+          }
+        });
+      });
+
       document.getElementById('resetBugLabBtn').addEventListener('click', function () {
         discoveredBugs = {};
+        reviewedDetails = {};
+        document.getElementById('labReviewCounter').textContent = 'Bonus details reviewed: 0 / 2';
+        document.querySelectorAll('.lab-observation-btn').forEach(function (btn) {
+          btn.setAttribute('aria-pressed', 'false');
+          btn.removeAttribute('data-result');
+        });
         document.querySelectorAll('.bug-target-btn').forEach(function (btn) {
+          btn.setAttribute('aria-pressed', 'false');
           btn.classList.remove('ring-2', 'ring-emerald-500', 'bg-emerald-50/70');
         });
-        document.getElementById('bugFeedbackText').innerHTML = '💡 <strong>Hint:</strong> Check the item math calculation, the selected delivery date, and the red payment button text.';
+        document.getElementById('bugFeedbackText').innerHTML = '💡 <strong>Hint:</strong> Check the item math, delivery date, and payment button. Then inspect the delivery wording and guest checkout.';
         updateBugLab(null);
       });
 
