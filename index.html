@@ -147,6 +147,29 @@
               </div>
             </div>
           </div>
+            <div class="booking-calendar hero-booking" id="bookingCalendar">
+              <div class="hero-booking-copy">
+                <span class="hero-booking-icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M7 3v4m10-4v4M3 11h18m-12 4h2m2 0h2"/></svg></span>
+                <div><p class="hero-booking-eyebrow">PLAN YOUR NEXT STEP</p><h2 class="hero-booking-title">Find your next batch.</h2></div>
+              </div>
+              <button type="button" id="bookingCalendarToggle" class="booking-trigger" aria-expanded="false" aria-controls="bookingCalendarPanel">
+                View calendar <span aria-hidden="true">↗</span>
+              </button>
+              <div class="hero-booking-summary"><span><i class="hero-booking-dot is-full" aria-hidden="true"></i>9–13 Nov <strong>Fully booked</strong></span><span><i class="hero-booking-dot" aria-hidden="true"></i>14–23 Nov <strong>Partially booked</strong></span></div>
+              <section id="bookingCalendarPanel" class="booking-panel" aria-label="Student booking calendar" hidden>
+                <div class="booking-heading"><span>Student bookings</span><button type="button" id="bookingCalendarClose" aria-label="Close calendar">×</button></div>
+                <div class="booking-month-nav">
+                  <button type="button" id="bookingPreviousMonth" aria-label="Previous month">‹</button>
+                  <h3 id="bookingMonth" aria-live="polite"></h3>
+                  <button type="button" id="bookingNextMonth" aria-label="Next month">›</button>
+                </div>
+                <div class="booking-weekdays" aria-hidden="true"><span>Su</span><span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span></div>
+                <div class="booking-days" id="bookingDays" role="group" aria-labelledby="bookingMonth"></div>
+                <p class="booking-legend"><span aria-hidden="true"></span> Fully booked <span class="booking-partial-dot" aria-hidden="true"></span> Partially booked</p>
+                <p id="bookingDateStatus" class="booking-status" role="status">9–13 November: fully booked. 14–23 November: partially booked.</p>
+                <p class="booking-help">Hover or tap a date for details. Ask a mentor about other dates.</p>
+              </section>
+            </div>
         </div>
 
       </div>
@@ -950,8 +973,7 @@
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label for="studentName" class="block text-xs font-semibold text-blue-200 mb-1">Your Name</label>
-                  <input id="studentName" name="name" type="text" autocomplete="name" required placeholder="Enter your full name" aria-describedby="studentNameHint" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white text-sm focus:outline-none focus:border-blue-400" />
-                  <p id="studentNameHint" class="mt-1.5 text-xs text-slate-400">For example: Ananya Sharma</p>
+                  <input id="studentName" name="name" type="text" autocomplete="name" required placeholder="Enter your full name" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white text-sm focus:outline-none focus:border-blue-400" />
                 </div>
                 <div>
                   <label for="studentBackground" class="block text-xs font-semibold text-blue-200 mb-1">Current Background</label>
@@ -1163,5 +1185,6 @@
       });
     })();
   </script>
+  <script src="assets/booking-calendar.js" defer></script>
 </body>
 </html>
