@@ -173,21 +173,20 @@
         <div class="relative min-w-0">
           <div class="hero-photo relative rounded-[1.75rem] overflow-hidden border border-white bg-slate-900 group">
             <img
-              src="assets/qa-testing-hero.jpg"
-              srcset="assets/qa-testing-hero-small.jpg 768w, assets/qa-testing-hero.jpg 1536w"
+              src="assets/qa-learning-hero.jpg"
+              srcset="assets/qa-learning-hero-small.jpg 768w, assets/qa-learning-hero.jpg 1536w"
               sizes="(min-width: 1024px) 480px, (min-width: 640px) 560px, calc(100vw - 32px)"
               width="1536" height="1024" fetchpriority="high" decoding="async"
-              alt="QA testing workspace with test cases, automation results, and an application tested on desktop, laptop, and phone"
+              alt="3D illustration of a QA engineer checking an application across devices, with a bug inspection, test checklist, and automation flow"
               class="w-full object-cover group-hover:scale-[1.025] transition-transform duration-500"
             />
-            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/50 via-transparent to-transparent pointer-events-none" aria-hidden="true"></div>
-            <div class="absolute top-4 left-4 rounded-full bg-white/95 backdrop-blur-md px-3 py-2 text-[11px] font-semibold text-slate-700 shadow-sm border border-white/70">
+            <div class="hero-image-caption">
               Better testers. Brighter futures.
             </div>
-            <div class="hero-panels absolute bottom-3 left-3 right-3 sm:bottom-4 sm:left-4 sm:right-4 text-white">
-              <div class="hero-formula rounded-2xl border border-white/15 px-3 py-3.5 sm:px-4">
+            <div class="hero-panels text-white">
+              <div class="hero-formula rounded-2xl border border-white/15">
                 <p class="text-[9px] font-bold uppercase tracking-[0.15em] text-slate-300">The tesqivo Formula</p>
-                <ol class="flex items-center justify-between gap-2 mt-2.5 text-[11px] sm:text-sm font-semibold text-white">
+                <ol class="flex items-center justify-between gap-2 mt-1.5 text-xs sm:text-sm font-semibold text-white">
                   <li class="flex items-center gap-1.5 whitespace-nowrap"><span class="text-emerald-300" aria-hidden="true">✓</span> Learn</li>
                   <li class="flex items-center gap-1.5 whitespace-nowrap"><span class="text-emerald-300" aria-hidden="true">✓</span> Practice</li>
                   <li class="flex items-center gap-1.5 whitespace-nowrap"><span class="text-emerald-300" aria-hidden="true">✓</span> Get Hired</li>
@@ -203,7 +202,7 @@
               <button type="button" id="bookingCalendarToggle" class="booking-trigger" aria-expanded="false" aria-controls="bookingCalendarPanel">
                 View calendar <span aria-hidden="true">↗</span>
               </button>
-              <div class="hero-booking-summary"><span><i class="hero-booking-dot is-full" aria-hidden="true"></i>9–13 Nov <strong>Fully booked</strong></span><span><i class="hero-booking-dot" aria-hidden="true"></i>14–23 Nov <strong>Partially booked</strong></span></div>
+              <div class="hero-booking-summary"><span><i class="hero-booking-dot is-full" aria-hidden="true"></i><span id="fullyBookedRange">14–23</span> <strong>Fully booked</strong></span><span><i class="hero-booking-dot" aria-hidden="true"></i><span id="partiallyBookedRange">24–30</span> <strong>Partially booked</strong></span></div>
               <section id="bookingCalendarPanel" class="booking-panel" aria-label="Student booking calendar" hidden>
                 <div class="booking-heading"><span>Student bookings</span><button type="button" id="bookingCalendarClose" aria-label="Close calendar">×</button></div>
                 <div class="booking-month-nav">
@@ -214,7 +213,7 @@
                 <div class="booking-weekdays" aria-hidden="true"><span>Su</span><span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span></div>
                 <div class="booking-days" id="bookingDays" role="group" aria-labelledby="bookingMonth"></div>
                 <p class="booking-legend"><span aria-hidden="true"></span> Fully booked <span class="booking-partial-dot" aria-hidden="true"></span> Partially booked</p>
-                <p id="bookingDateStatus" class="booking-status" role="status">9–13 November: fully booked. 14–23 November: partially booked.</p>
+                <p id="bookingDateStatus" class="booking-status" role="status">14–23: fully booked. 24–30: partially booked.</p>
                 <p class="booking-help">Hover or tap a date for details. Ask a mentor about other dates.</p>
               </section>
             </div>
@@ -1126,6 +1125,32 @@
   </div>
 
   </div>
+  <dialog id="enquiryPopup" class="enquiry-popup" aria-labelledby="enquiryPopupTitle" aria-describedby="enquiryPopupDescription">
+    <aside class="enquiry-popup-feature" aria-label="Learn with Tesqivo">
+      <span class="enquiry-popup-feature-kicker">LEARN. PRACTICE. GET HIRED.</span>
+      <h3>Big curiosity.<br />Real skills.<br />Your next chapter.</h3>
+      <p>Learn to test real products and take your first step into QA with confidence.</p>
+      <img src="assets/qa-learning-hero-small.jpg" alt="" width="768" height="512" loading="lazy" decoding="async" />
+      <span class="enquiry-popup-feature-footer">A little guidance goes a long way.</span>
+    </aside>
+    <div class="enquiry-popup-content">
+    <div class="enquiry-popup-heading">
+      <div class="enquiry-popup-title-group">
+        <img class="enquiry-popup-logo" src="assets/tesqivo-wordmark-transparent-web.png" alt="Tesqivo" width="1082" height="369" />
+        <h2 id="enquiryPopupTitle">Start your QA journey.</h2>
+      </div>
+      <button type="button" class="enquiry-popup-close" data-close-enquiry aria-label="Close enquiry form" autofocus>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="m6 6 12 12M18 6 6 18" /></svg>
+      </button>
+    </div>
+    <div class="enquiry-popup-body">
+      <p id="enquiryPopupDescription">Get batch timings, fees, and guidance from a mentor.</p>
+      <div id="enquiryPopupForm"></div>
+      <p class="enquiry-popup-note">Review and send your enquiry on WhatsApp.</p>
+      <button type="button" class="enquiry-popup-later" data-close-enquiry>Maybe later</button>
+    </div>
+    </div>
+  </dialog>
   <script src="assets/site-loading.js" defer></script>
   <script>
     (function () {
@@ -1285,9 +1310,11 @@
         var timing = document.getElementById('preferredTiming').value;
         var message = 'Hi tesqivo team! I am ' + name + ' (' + background + '). I would like to get batch details, fees, and schedule for ' + program + ' (' + timing + ').';
         window.open('https://wa.me/919074697379?text=' + encodeURIComponent(message), '_blank', 'noopener,noreferrer');
+        this.dispatchEvent(new Event('inquiry:prepared'));
       });
     })();
   </script>
   <script src="assets/booking-calendar.js" defer></script>
+  <script src="assets/enquiry-popup.js" defer></script>
 </body>
 </html>
