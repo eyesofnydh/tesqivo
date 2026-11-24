@@ -13,6 +13,7 @@ await copyFile('index.html', 'dist/index.html');
 await copyFile('assets/booking-calendar.js', 'dist/assets/booking-calendar.js');
 await copyFile('assets/site-loading.js', 'dist/assets/site-loading.js');
 await copyFile('assets/enquiry-popup.js', 'dist/assets/enquiry-popup.js');
+await copyFile('assets/enquiry-form.js', 'dist/assets/enquiry-form.js');
 for (const file of ['site.css', 'tesqivo-wordmark-transparent-web.png', 'tesqivo-symbol-transparent.png', 'favicon.png', 'qa-learning-hero.jpg', 'qa-learning-hero-small.jpg', 'whatsapp-group-qr.png']) {
   await copyFile(`assets/${file}`, `dist/assets/${file}`);
 }

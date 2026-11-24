@@ -47,9 +47,9 @@
     root.classList.remove('enquiry-popup-open');
     if (previousFocus?.isConnected) previousFocus.focus({ preventScroll: true });
   });
-  form.addEventListener('inquiry:prepared', () => {
+  form.addEventListener('inquiry:submitted', () => {
     markSeen();
-    if (dialog.open) dialog.close();
+    // Keep the confirmation visible until the visitor closes the popup.
   });
   // A deliberate jump to the enquiry section should go straight to that form.
   document.querySelectorAll('a[href="#enrollSection"]').forEach(link => {
