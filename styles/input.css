@@ -331,15 +331,15 @@ header a.brand-lockup { display: flex; flex-direction: column; gap: 0; }
 @keyframes enquiry-confirm-in { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
 @media (prefers-reduced-motion: reduce) { #batchInquiryForm .enquiry-actions button.is-sending, #batchInquiryForm .enquiry-actions button.is-sending::before, .enquiry-status[data-state="success"] { animation: none; } }
 
-.footer-layout { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 20px; }
-.footer-layout > p { justify-self: end; }
-.footer-community { display: flex; align-items: center; gap: 12px; padding: 8px 12px; border: 1px solid #334155; border-radius: 16px; background: #111c31; color: #f8fafc; }
-.footer-community img { width: 104px; height: auto; padding: 4px; border-radius: 8px; background: #fff; }
-.footer-community strong, .footer-community span { display: block; }
-.footer-community strong { font-size: .8rem; }
-.footer-community span { margin-top: 3px; color: #cbd5e1; font-size: .72rem; line-height: 1.4; }
-.footer-community span a { color: #86efac; text-decoration: underline; text-underline-offset: 2px; }
-@media (max-width: 1023px) { .footer-layout { grid-template-columns: 1fr; justify-items: center; text-align: center; } .footer-layout > p { justify-self: center; } }
+.footer-layout { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+@media (max-width: 639px) { .footer-layout { flex-direction: column; text-align: center; } }
+.community-qr { display: flex; align-items: center; gap: 14px; padding: 12px; border: 1px solid #d1fae5; border-radius: 16px; background: #f0fdf4; }
+.community-qr > a { flex-shrink: 0; padding: 5px; border-radius: 10px; background: #fff; }
+.community-qr img { width: 100px; height: auto; }
+.community-qr-title { color: #064e3b; font-size: .875rem; font-weight: 800; }
+.community-qr-copy { margin-top: 3px; color: #475569; font-size: .75rem; line-height: 1.45; }
+.community-qr-link { display: inline-flex; align-items: center; min-height: 36px; margin-top: 5px; color: #047857; font-size: .8rem; font-weight: 800; text-decoration: underline; text-underline-offset: 2px; }
+@media (max-width: 380px) { .community-qr { gap: 9px; } .community-qr img { width: 82px; } }
 /* Compact captions overlay the illustration without adding height to the card. */
 #heroSection .hero-photo img { height: auto; aspect-ratio: 3 / 2; object-position: center; }
 .hero-image-caption { position: absolute; top: 12px; left: 12px; max-width: calc(100% - 24px); padding: 6px 10px; border: 1px solid #ffffffb3; border-radius: 999px; background: #fffffff2; color: #334155; font-size: 11px; line-height: 1.5; font-weight: 600; }
