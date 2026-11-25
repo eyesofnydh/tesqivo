@@ -44,7 +44,7 @@
       });
     })();
   </script>
-  <link rel="icon" type="image/png" href="assets/tesqivo-mark.png" />
+  <link rel="icon" type="image/png" href="assets/tesqivo-symbol-transparent.png?v=20261125" />
   <link rel="preload" href="assets/fonts/plus-jakarta-latin-v12.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="preload" href="assets/fonts/caveat-latin-v23.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="stylesheet" href="assets/site.css" />
@@ -122,7 +122,7 @@
   </header>
 
   <!-- Hero Section (Hooking, High Impact, Human-Centric) -->
-  <section id="heroSection" class="relative overflow-hidden bg-gradient-to-b from-blue-50/60 via-white to-slate-50 pt-10 pb-12 lg:pt-16 lg:pb-16">
+  <section id="heroSection" class="relative bg-gradient-to-b from-blue-50/60 via-white to-slate-50 pt-10 pb-12 lg:pt-16 lg:pb-16">
     <div class="max-w-6xl mx-auto px-4 sm:px-6">
       <div class="hero-grid grid grid-cols-1 gap-9 items-center">
         
@@ -202,7 +202,7 @@
               <button type="button" id="bookingCalendarToggle" class="booking-trigger" aria-expanded="false" aria-controls="bookingCalendarPanel">
                 View calendar <span aria-hidden="true">↗</span>
               </button>
-              <div class="hero-booking-summary"><span><i class="hero-booking-dot is-full" aria-hidden="true"></i><span id="fullyBookedRange">14–23</span> <strong>Fully booked</strong></span><span><i class="hero-booking-dot" aria-hidden="true"></i><span id="partiallyBookedRange">24–30</span> <strong>Partially booked</strong></span></div>
+              <div class="hero-booking-summary"><span id="fullyBookedSummary"><i class="hero-booking-dot is-full" aria-hidden="true"></i><span id="fullyBookedRange"></span> <strong>Fully booked</strong></span><span id="partiallyBookedSummary"><i class="hero-booking-dot" aria-hidden="true"></i><span id="partiallyBookedRange"></span> <strong>Partially booked</strong></span><span id="unmarkedBookingSummary" hidden>Enquire about upcoming dates</span></div>
               <dialog id="bookingCalendarPanel" class="booking-panel" aria-label="Student booking calendar">
                 <div class="booking-heading"><span>Student bookings</span><button type="button" id="bookingCalendarClose" aria-label="Close calendar">×</button></div>
                 <div class="booking-month-nav">
@@ -213,8 +213,8 @@
                 <div class="booking-weekdays" aria-hidden="true"><span>Su</span><span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span></div>
                 <div class="booking-days" id="bookingDays" role="group" aria-labelledby="bookingMonth"></div>
                 <p class="booking-legend"><span aria-hidden="true"></span> Fully booked <span class="booking-partial-dot" aria-hidden="true"></span> Partially booked</p>
-                <p id="bookingDateStatus" class="booking-status" role="status">14–23: fully booked. 24–30: partially booked.</p>
-                <p class="booking-help">Hover or tap a date for details. Ask a mentor about other dates.</p>
+                <p id="bookingDateStatus" class="booking-status" role="status"></p>
+                <p class="booking-help">Select an upcoming date to enquire about a batch.</p>
               </dialog>
             </div>
         </div>
@@ -1069,13 +1069,12 @@
                 </div>
               </div>
 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4"><div><label for="studentEmail" class="block text-xs font-semibold text-blue-200 mb-1">Email Address</label><input id="studentEmail" name="email" type="email" autocomplete="email" required maxlength="254" placeholder="you@example.com" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white text-sm focus:outline-none focus:border-blue-400" /></div>
-<div><label for="studentPhone" class="block text-xs font-semibold text-blue-200 mb-1">Mobile Number</label><div class="enquiry-phone-field"><span class="enquiry-dial-code" aria-label="India country code plus ninety one"><img src="assets/india-flag.svg" alt="" width="24" height="16" />+91</span><input id="studentPhone" name="phone" type="tel" inputmode="numeric" autocomplete="tel-national" required maxlength="10" pattern="[6-9][0-9]{9}" placeholder="9876543210" aria-describedby="phoneHelp phoneError" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white text-sm focus:outline-none focus:border-blue-400" /></div><small id="phoneHelp" class="enquiry-phone-help">Enter your 10-digit Indian mobile number.</small><small id="phoneError" class="enquiry-phone-error" aria-live="polite" hidden>Enter a valid 10-digit Indian mobile number.</small></div></div>
+<div><label for="studentPhone" class="block text-xs font-semibold text-blue-200 mb-1">Mobile Number</label><div class="enquiry-phone-field"><span class="enquiry-dial-code" aria-label="India country code plus ninety one"><img src="assets/india-flag.svg" alt="" width="24" height="16" />+91</span><input id="studentPhone" name="phone" type="tel" inputmode="numeric" autocomplete="tel-national" required maxlength="10" pattern="[6-9][0-9]{9}" placeholder="Mobile number" aria-describedby="phoneHelp phoneError" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white text-sm focus:outline-none focus:border-blue-400" /></div><small id="phoneHelp" class="enquiry-phone-help">Enter your 10-digit Indian mobile number.</small><small id="phoneError" class="enquiry-phone-error" aria-live="polite" hidden>Enter a valid 10-digit Indian mobile number.</small></div></div>
               <div class="enquiry-actions pt-2 flex flex-wrap items-center gap-3">
                 <button type="submit" class="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold px-6 py-3.5 rounded-xl shadow-lg transition-all text-sm">Submit Enquiry</button>
               </div>
 <p id="enquiryStatus" class="enquiry-status" role="status" aria-live="polite" tabindex="-1" hidden></p>
 <button id="anotherEnquiry" class="enquiry-another" type="button" hidden>Send another enquiry</button>
-<p class="enquiry-privacy">We’ll use your details to respond to your enquiry.</p>
             </form>
             <p class="text-sm text-slate-300 flex flex-wrap items-baseline gap-x-2 gap-y-1">
               <span>Prefer email?</span>

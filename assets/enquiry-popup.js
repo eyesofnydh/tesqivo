@@ -19,6 +19,7 @@
 
   function onScroll() {
     if (seen || root.classList.contains('page-loading')) return;
+    if (document.getElementById('bookingCalendarPanel')?.open) return;
     const distance = root.scrollHeight - root.clientHeight;
     if (distance <= 0 || window.scrollY / distance < scrollThreshold) return;
     // Do not interrupt someone who has already reached the full enquiry form.
@@ -55,6 +56,7 @@
   document.querySelectorAll('a[href="#enrollSection"]').forEach(link => {
     link.addEventListener('click', markSeen);
   });
+  document.addEventListener('enquiry:direct-navigation', markSeen);
   if (window.location.hash === '#enrollSection') markSeen();
   if (!seen) window.addEventListener('scroll', onScroll, { passive: true });
 })();
