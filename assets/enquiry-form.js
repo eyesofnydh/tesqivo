@@ -3,8 +3,17 @@
   const status = document.getElementById('enquiryStatus');
   const button = form.querySelector('[type="submit"]');
   const name = document.getElementById('studentName');
+  const phone = document.getElementById('studentPhone');
+  const anotherButton = document.getElementById('anotherEnquiry');
   let sending = false;
   name.addEventListener('input', () => name.setCustomValidity(''));
+  function validatePhone() {
+    const value = phone.value.trim();
+    const digits = value.replace(/\D/g, '');
+    const valid = /^\+?[\d\s()-]+$/.test(value) && digits.length >= 10 && digits.length <= 15;
+    phone.setCustomValidity(!value ? '' : valid ? '' : 'Enter a valid phone number with 10 to 15 digits.');
+  }
+  phone.addEventListener('input', validatePhone);
   function showStatus(message, state) {
     status.hidden = false;
     status.dataset.state = state;
@@ -14,6 +23,7 @@
     event.preventDefault();
     if (sending) return;
     name.setCustomValidity(name.value.trim() ? '' : 'Please enter your name.');
+    validatePhone();
     if (!form.reportValidity()) return;
     // Netlify removes this attribute when registering the deployed form.
     if (form.hasAttribute('data-netlify')) {
@@ -38,10 +48,12 @@
       });
       if (!response.ok) throw new Error('Submission rejected');
       form.reset();
+      phone.setCustomValidity('');
+      form.classList.add('is-submitted');
+      anotherButton.hidden = false;
       showStatus('Thank you! Your enquiry has been received. Our team will get back to you.', 'success');
       form.dispatchEvent(new Event('inquiry:submitted'));
       status.focus({ preventScroll: true });
-      status.scrollIntoView({ block: 'nearest', behavior: 'auto' });
     } catch (error) {
       showStatus(error.name === 'AbortError'
         ? 'We couldn’t confirm delivery. Please email learnwithtesqivo@gmail.com before trying again.'
@@ -53,5 +65,11 @@
       button.textContent = 'Submit Enquiry';
       form.removeAttribute('aria-busy');
     }
+  });
+  anotherButton.addEventListener('click', () => {
+    form.classList.remove('is-submitted');
+    anotherButton.hidden = true;
+    status.hidden = true;
+    name.focus({ preventScroll: true });
   });
 })();

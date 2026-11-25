@@ -76,3 +76,67 @@ function safeText_(value) {
 function reply_(value) {
   return ContentService.createTextOutput(JSON.stringify(value)).setMimeType(ContentService.MimeType.JSON);
 }
+
+// The notification email is an independent backup when a Netlify webhook fails.
+// Run installEmailSync once in the editor and authorize Gmail access.
+function installEmailSync() {
+  syncNotificationEmails();
+  if (!ScriptApp.getProjectTriggers().some(trigger =>
+    trigger.getHandlerFunction() === 'syncNotificationEmails')) {
+    ScriptApp.newTrigger('syncNotificationEmails').timeBased().everyMinutes(5).create();
+  }
+}
+
+function syncNotificationEmails() {
+  const props = PropertiesService.getScriptProperties();
+  const sheet = SpreadsheetApp.openById(props.getProperty('SPREADSHEET_ID')).getSheetByName('Enquiries');
+  if (!sheet) throw new Error('Run setupSheet first');
+  const lock = LockService.getScriptLock();
+  lock.waitLock(20000);
+  let added = 0;
+  try {
+    const lastRow = sheet.getLastRow();
+    const existing = lastRow > 1 ? sheet.getRange(2, 1, lastRow - 1, 8).getDisplayValues() : [];
+    const threads = GmailApp.search('from:formresponses@netlify.com subject:"New Tesqivo enquiry" newer_than:30d', 0, 100);
+    threads.forEach(thread => thread.getMessages().forEach(message => {
+      if (!message.getFrom().includes('formresponses@netlify.com') ||
+          message.getSubject() !== 'New Tesqivo enquiry') return;
+      const body = message.getPlainBody();
+      const name = emailField_(body, 'Your Name');
+      const email = emailField_(body, 'Email Address');
+      const phone = emailField_(body, 'Mobile Number (optional)');
+      const background = emailField_(body, 'Current Background');
+      const program = emailField_(body, 'Interested Program');
+      const timing = emailField_(body, 'Preferred Timing');
+      if (!name || !email || !program) return;
+      const id = 'EMAIL-RECOVERY-' + message.getId();
+      const receivedAt = message.getDate();
+      const alreadySaved = existing.some(row => {
+        if (row[0] === id) return true;
+        const rowTime = new Date(String(row[1]).replace(' ', 'T') + '+05:30');
+        return row[2] === name && row[3] === email && row[4] === phone &&
+          row[5] === background && row[6] === program && row[7] === timing &&
+          Math.abs(rowTime.getTime() - receivedAt.getTime()) < 180000;
+      });
+      if (alreadySaved) return;
+      const row = [id, Utilities.formatDate(receivedAt, 'Asia/Kolkata', 'yyyy-MM-dd HH:mm:ss'),
+        name, email, phone, background, program, timing].map(safeText_);
+      const target = sheet.getRange(sheet.getLastRow() + 1, 1, 1, row.length);
+      target.setNumberFormat('@');
+      target.setValues([row]);
+      existing.push(row);
+      added++;
+    }));
+    SpreadsheetApp.flush();
+    return added;
+  } finally {
+    lock.releaseLock();
+  }
+}
+
+function emailField_(body, label) {
+  const marker = label + ':';
+  const start = body.indexOf(marker);
+  if (start < 0) return '';
+  return body.slice(start + marker.length).replace(/^\s*/, '').split(/\r?\n/)[0].trim();
+}

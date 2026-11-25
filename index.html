@@ -1066,11 +1066,12 @@
                 </div>
               </div>
 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4"><div><label for="studentEmail" class="block text-xs font-semibold text-blue-200 mb-1">Email Address</label><input id="studentEmail" name="email" type="email" autocomplete="email" required maxlength="254" placeholder="you@example.com" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white text-sm focus:outline-none focus:border-blue-400" /></div>
-<div><label for="studentPhone" class="block text-xs font-semibold text-blue-200 mb-1">Mobile Number (optional)</label><input id="studentPhone" name="phone" type="tel" autocomplete="tel"  maxlength="30" placeholder="Include country code" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white text-sm focus:outline-none focus:border-blue-400" /></div></div>
+<div><label for="studentPhone" class="block text-xs font-semibold text-blue-200 mb-1">Mobile Number</label><input id="studentPhone" name="phone" type="tel" inputmode="tel" autocomplete="tel" required maxlength="22" placeholder="10–15 digits, country code optional" aria-describedby="phoneHelp" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white text-sm focus:outline-none focus:border-blue-400" /><small id="phoneHelp" class="enquiry-phone-help">Use 10–15 digits. You can include +, spaces, or hyphens.</small></div></div>
               <div class="enquiry-actions pt-2 flex flex-wrap items-center gap-3">
                 <button type="submit" class="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold px-6 py-3.5 rounded-xl shadow-lg transition-all text-sm">Submit Enquiry</button>
               </div>
 <p id="enquiryStatus" class="enquiry-status" role="status" aria-live="polite" tabindex="-1" hidden></p>
+<button id="anotherEnquiry" class="enquiry-another" type="button" hidden>Send another enquiry</button>
 <p class="enquiry-privacy">We’ll use your details to respond to your enquiry.</p>
             </form>
             <p class="text-sm text-slate-300 flex flex-wrap items-baseline gap-x-2 gap-y-1">
