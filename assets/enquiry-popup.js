@@ -4,17 +4,14 @@
   if (!dialog || !form || typeof dialog.showModal !== 'function') return;
 
   const root = document.documentElement;
-  const sessionKey = 'tesqivo-enquiry-popup-seen';
   const scrollThreshold = 0.12;
   let seen = false;
   let placeholder;
   let previousFocus;
-  try { seen = sessionStorage.getItem(sessionKey) === '1'; } catch { /* Storage may be disabled. */ }
 
   function markSeen() {
     seen = true;
     window.removeEventListener('scroll', onScroll);
-    try { sessionStorage.setItem(sessionKey, '1'); } catch { /* Keep the in-memory fallback. */ }
   }
 
   function onScroll() {
