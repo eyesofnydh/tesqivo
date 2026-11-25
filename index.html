@@ -1035,11 +1035,12 @@
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label for="studentName" class="block text-xs font-semibold text-blue-200 mb-1">Your Name</label>
-                  <input id="studentName" name="name" type="text" autocomplete="name" required placeholder="Enter your full name" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white text-sm focus:outline-none focus:border-blue-400" />
+                  <input id="studentName" name="name" type="text" autocomplete="name" required maxlength="100" placeholder="Enter your full name" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white text-sm focus:outline-none focus:border-blue-400" />
                 </div>
                 <div>
                   <label for="studentBackground" class="block text-xs font-semibold text-blue-200 mb-1">Current Background</label>
-                  <select id="studentBackground" name="background" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white text-sm focus:outline-none focus:border-blue-400">
+                  <select id="studentBackground" name="background" required class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white text-sm focus:outline-none focus:border-blue-400">
+                    <option value="" disabled selected>Select background</option>
                     <option value="Student / Fresher">Student / Fresher</option>
                     <option value="Career Switcher (Non-IT to IT)">Career Switcher (Non-IT to IT)</option>
                     <option value="Working Professional (0-3 Years)">Working Professional (0-3 Years)</option>
@@ -1050,7 +1051,8 @@
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label for="selectedProgram" class="block text-xs font-semibold text-blue-200 mb-1">Interested Program</label>
-                  <select id="selectedProgram" name="program" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white text-sm focus:outline-none focus:border-blue-400">
+                  <select id="selectedProgram" name="program" required class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white text-sm focus:outline-none focus:border-blue-400">
+                    <option value="" disabled selected>Select program</option>
                     <option value="10-Day QA Bootcamp">10-Day QA Bootcamp</option>
                     <option value="Fast Track: Last-Minute Interview Prep">Interview Prep Fast Track</option>
                     <option value="Both Programs">Both Programs</option>
@@ -1058,7 +1060,8 @@
                 </div>
                 <div>
                   <label for="preferredTiming" class="block text-xs font-semibold text-blue-200 mb-1">Preferred Timing</label>
-                  <select id="preferredTiming" name="timing" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white text-sm focus:outline-none focus:border-blue-400">
+                  <select id="preferredTiming" name="timing" required class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white text-sm focus:outline-none focus:border-blue-400">
+                    <option value="" disabled selected>Select timing</option>
                     <option value="Evening Batch (Online)">Evening Batch (Online)</option>
                     <option value="Morning Batch">Morning Batch</option>
                     <option value="Weekend Intensive">Weekend Intensive</option>
@@ -1066,7 +1069,7 @@
                 </div>
               </div>
 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4"><div><label for="studentEmail" class="block text-xs font-semibold text-blue-200 mb-1">Email Address</label><input id="studentEmail" name="email" type="email" autocomplete="email" required maxlength="254" placeholder="you@example.com" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white text-sm focus:outline-none focus:border-blue-400" /></div>
-<div><label for="studentPhone" class="block text-xs font-semibold text-blue-200 mb-1">Mobile Number</label><input id="studentPhone" name="phone" type="tel" inputmode="tel" autocomplete="tel" required maxlength="22" placeholder="10–15 digits, country code optional" aria-describedby="phoneHelp" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white text-sm focus:outline-none focus:border-blue-400" /><small id="phoneHelp" class="enquiry-phone-help">Use 10–15 digits. You can include +, spaces, or hyphens.</small></div></div>
+<div><label for="studentPhone" class="block text-xs font-semibold text-blue-200 mb-1">Mobile Number</label><input id="studentPhone" name="phone" type="tel" inputmode="tel" autocomplete="tel" required maxlength="22" placeholder="98765 43210" aria-describedby="phoneHelp" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white text-sm focus:outline-none focus:border-blue-400" /><small id="phoneHelp" class="enquiry-phone-help">10–15 digits; country code optional.</small></div></div>
               <div class="enquiry-actions pt-2 flex flex-wrap items-center gap-3">
                 <button type="submit" class="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold px-6 py-3.5 rounded-xl shadow-lg transition-all text-sm">Submit Enquiry</button>
               </div>

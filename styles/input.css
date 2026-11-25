@@ -302,7 +302,9 @@ header a.brand-lockup { display: flex; flex-direction: column; gap: 0; }
 /* Shared enquiry form and its scroll-triggered popup. */
 .enquiry-status { padding: 12px; border-radius: 12px; font-size: .875rem; line-height: 1.6; background: #eff6ff; color: #1e40af; }
 .enquiry-status[data-state="success"] { background: #ecfdf5; color: #065f46; }
+.enquiry-status[data-state="success"] { white-space: pre-line; text-align: center; font-weight: 700; }
 .enquiry-status[data-state="error"] { background: #fff1f2; color: #9f1239; }
+#batchInquiryForm label[for]::after { content: ' *'; color: #fb7185; }
 .enquiry-privacy { font-size: .875rem; line-height: 1.6; color: #cbd5e1; }
 .enquiry-phone-help { display: block; margin-top: 4px; font-size: .72rem; line-height: 1.35; color: #cbd5e1; }
 .enquiry-popup .enquiry-privacy { color: #64748b; }
@@ -310,7 +312,7 @@ header a.brand-lockup { display: flex; flex-direction: column; gap: 0; }
 .enquiry-another { min-height: 44px; padding: 8px 16px; border: 1px solid currentColor; border-radius: 10px; color: inherit; font-size: .875rem; font-weight: 700; }
 #batchInquiryForm.is-submitted .grid, #batchInquiryForm.is-submitted .enquiry-actions, #batchInquiryForm.is-submitted .enquiry-privacy { display: none; }
 #batchInquiryForm.is-submitted .enquiry-status { margin-top: 0; }
-#batchInquiryForm.is-submitted .enquiry-another { display: inline-flex; align-items: center; justify-content: center; }
+#batchInquiryForm.is-submitted .enquiry-another { display: flex; align-items: center; justify-content: center; width: fit-content; margin-left: auto; margin-right: auto; }
 #batchInquiryForm button:disabled { opacity: .65; cursor: wait; }
 /* Compact captions overlay the illustration without adding height to the card. */
 #heroSection .hero-photo img { height: auto; aspect-ratio: 3 / 2; object-position: center; }

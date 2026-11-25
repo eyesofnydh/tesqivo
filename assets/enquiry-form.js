@@ -51,7 +51,7 @@
       phone.setCustomValidity('');
       form.classList.add('is-submitted');
       anotherButton.hidden = false;
-      showStatus('Thank you! Your enquiry has been received. Our team will get back to you.', 'success');
+      showStatus('Thank you! Your enquiry has been received.\nOur team will get back to you soon.', 'success');
       form.dispatchEvent(new Event('inquiry:submitted'));
       status.focus({ preventScroll: true });
     } catch (error) {

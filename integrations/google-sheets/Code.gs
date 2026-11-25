@@ -138,5 +138,5 @@ function emailField_(body, label) {
   const marker = label + ':';
   const start = body.indexOf(marker);
   if (start < 0) return '';
-  return body.slice(start + marker.length).replace(/^\s*/, '').split(/\r?\n/)[0].trim();
+  return body.slice(start + marker.length).replace(/^\r?\n/, '').split(/\r?\n/)[0].trim();
 }
