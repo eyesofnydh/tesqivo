@@ -104,7 +104,7 @@ function syncNotificationEmails() {
       const body = message.getPlainBody();
       const name = emailField_(body, 'Your Name');
       const email = emailField_(body, 'Email Address');
-      const phone = emailField_(body, 'Mobile Number (optional)');
+      const phone = emailField_(body, 'Mobile Number') || emailField_(body, 'Mobile Number (optional)');
       const background = emailField_(body, 'Current Background');
       const program = emailField_(body, 'Interested Program');
       const timing = emailField_(body, 'Preferred Timing');
