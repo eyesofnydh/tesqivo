@@ -9,9 +9,9 @@
   name.addEventListener('input', () => name.setCustomValidity(''));
   function validatePhone() {
     const value = phone.value.trim();
-    const digits = value.replace(/\D/g, '');
-    const valid = /^\+?[\d\s()-]+$/.test(value) && digits.length >= 10 && digits.length <= 15;
-    phone.setCustomValidity(!value ? '' : valid ? '' : 'Enter a valid phone number with 10 to 15 digits.');
+    const compact = value.replace(/[\s-]/g, '');
+    const valid = /^(?:\+91|91)?[6-9]\d{9}$/.test(compact);
+    phone.setCustomValidity(!value ? '' : valid ? '' : 'Enter a 10-digit Indian mobile number, with optional +91.');
   }
   phone.addEventListener('input', validatePhone);
   function showStatus(message, state) {

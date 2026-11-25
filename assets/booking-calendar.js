@@ -1,5 +1,4 @@
 (() => {
-  const calendar = document.getElementById('bookingCalendar');
   const trigger = document.getElementById('bookingCalendarToggle');
   const panel = document.getElementById('bookingCalendarPanel');
   const days = document.getElementById('bookingDays');
@@ -16,12 +15,15 @@
   }
   let today = currentDate();
   let month = new Date(today.getFullYear(), today.getMonth(), 1);
-  let pinned = false;
   const dateKey = (date) => `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
   function setOpen(open) {
-    if (open) refreshDate();
-    panel.hidden = !open;
-    trigger.setAttribute('aria-expanded', String(open));
+    if (open && !panel.open) {
+      refreshDate();
+      panel.showModal();
+    } else if (!open && panel.open) {
+      panel.close();
+    }
+    trigger.setAttribute('aria-expanded', String(panel.open));
   }
   function renderMonth() {
     monthLabel.textContent = month.toLocaleDateString('en-IN', { month: 'long', year: 'numeric' });
@@ -71,12 +73,13 @@
   window.setInterval(refreshDate, 60000);
   window.addEventListener('focus', refreshDate);
   document.addEventListener('visibilitychange', () => { if (!document.hidden) refreshDate(); });
-  trigger.addEventListener('click', () => { pinned = !pinned; setOpen(pinned); });
-  function close() { pinned = false; setOpen(false); }
-  document.getElementById('bookingCalendarClose').addEventListener('click', () => { trigger.focus(); close(); });
-  document.addEventListener('pointerdown', (event) => { if (!calendar.contains(event.target)) close(); });
-  calendar.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape') { event.preventDefault(); trigger.focus(); close(); }
+  trigger.addEventListener('click', () => setOpen(!panel.open));
+  document.getElementById('bookingCalendarClose').addEventListener('click', () => setOpen(false));
+  panel.addEventListener('close', () => trigger.setAttribute('aria-expanded', 'false'));
+  panel.addEventListener('click', event => {
+    const bounds = panel.getBoundingClientRect();
+    if (event.clientX < bounds.left || event.clientX > bounds.right ||
+        event.clientY < bounds.top || event.clientY > bounds.bottom) setOpen(false);
   });
   document.getElementById('bookingPreviousMonth').addEventListener('click', () => {
     month = new Date(month.getFullYear(), month.getMonth() - 1, 1); renderMonth();

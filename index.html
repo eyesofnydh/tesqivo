@@ -203,7 +203,7 @@
                 View calendar <span aria-hidden="true">↗</span>
               </button>
               <div class="hero-booking-summary"><span><i class="hero-booking-dot is-full" aria-hidden="true"></i><span id="fullyBookedRange">14–23</span> <strong>Fully booked</strong></span><span><i class="hero-booking-dot" aria-hidden="true"></i><span id="partiallyBookedRange">24–30</span> <strong>Partially booked</strong></span></div>
-              <section id="bookingCalendarPanel" class="booking-panel" aria-label="Student booking calendar" hidden>
+              <dialog id="bookingCalendarPanel" class="booking-panel" aria-label="Student booking calendar">
                 <div class="booking-heading"><span>Student bookings</span><button type="button" id="bookingCalendarClose" aria-label="Close calendar">×</button></div>
                 <div class="booking-month-nav">
                   <button type="button" id="bookingPreviousMonth" aria-label="Previous month">‹</button>
@@ -215,7 +215,7 @@
                 <p class="booking-legend"><span aria-hidden="true"></span> Fully booked <span class="booking-partial-dot" aria-hidden="true"></span> Partially booked</p>
                 <p id="bookingDateStatus" class="booking-status" role="status">14–23: fully booked. 24–30: partially booked.</p>
                 <p class="booking-help">Hover or tap a date for details. Ask a mentor about other dates.</p>
-              </section>
+              </dialog>
             </div>
         </div>
 
@@ -1069,7 +1069,7 @@
                 </div>
               </div>
 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4"><div><label for="studentEmail" class="block text-xs font-semibold text-blue-200 mb-1">Email Address</label><input id="studentEmail" name="email" type="email" autocomplete="email" required maxlength="254" placeholder="you@example.com" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white text-sm focus:outline-none focus:border-blue-400" /></div>
-<div><label for="studentPhone" class="block text-xs font-semibold text-blue-200 mb-1">Mobile Number</label><input id="studentPhone" name="phone" type="tel" inputmode="tel" autocomplete="tel" required maxlength="22" placeholder="98765 43210" aria-describedby="phoneHelp" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white text-sm focus:outline-none focus:border-blue-400" /><small id="phoneHelp" class="enquiry-phone-help">10–15 digits; country code optional.</small></div></div>
+<div><label for="studentPhone" class="block text-xs font-semibold text-blue-200 mb-1">Mobile Number</label><input id="studentPhone" name="phone" type="tel" inputmode="tel" autocomplete="tel" required maxlength="18" placeholder="98765 43210" aria-describedby="phoneHelp" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white text-sm focus:outline-none focus:border-blue-400" /><small id="phoneHelp" class="enquiry-phone-help">10-digit Indian number; +91 optional.</small></div></div>
               <div class="enquiry-actions pt-2 flex flex-wrap items-center gap-3">
                 <button type="submit" class="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold px-6 py-3.5 rounded-xl shadow-lg transition-all text-sm">Submit Enquiry</button>
               </div>
