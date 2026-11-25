@@ -72,15 +72,6 @@
   window.addEventListener('focus', refreshDate);
   document.addEventListener('visibilitychange', () => { if (!document.hidden) refreshDate(); });
   trigger.addEventListener('click', () => { pinned = !pinned; setOpen(pinned); });
-  calendar.addEventListener('pointerenter', (event) => {
-    if (event.pointerType === 'mouse') setOpen(true);
-  });
-  calendar.addEventListener('pointerleave', () => {
-    if (!pinned && !calendar.contains(document.activeElement)) setOpen(false);
-  });
-  calendar.addEventListener('focusout', (event) => {
-    if (!calendar.contains(event.relatedTarget) && !pinned) setOpen(false);
-  });
   function close() { pinned = false; setOpen(false); }
   document.getElementById('bookingCalendarClose').addEventListener('click', () => { trigger.focus(); close(); });
   document.addEventListener('pointerdown', (event) => { if (!calendar.contains(event.target)) close(); });
