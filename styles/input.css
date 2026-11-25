@@ -305,13 +305,41 @@ header a.brand-lockup { display: flex; flex-direction: column; gap: 0; }
 #batchInquiryForm label[for]::after { content: ' *'; color: #fb7185; }
 .enquiry-privacy { font-size: .875rem; line-height: 1.6; color: #cbd5e1; }
 .enquiry-phone-help { display: block; margin-top: 4px; font-size: .72rem; line-height: 1.35; color: #cbd5e1; }
+.enquiry-phone-field { display: flex; align-items: stretch; min-width: 0; border-radius: 12px; }
+.enquiry-phone-field input { flex: 1; min-width: 0; border-top-left-radius: 0; border-bottom-left-radius: 0; }
+.enquiry-dial-code { display: inline-flex; align-items: center; justify-content: center; gap: 5px; flex-shrink: 0; min-width: 80px; padding: 0 8px; border: 1px solid #475569; border-right: 0; border-radius: 12px 0 0 12px; background: #1e293b; color: #fff; font-size: .85rem; font-weight: 800; }
+.enquiry-dial-code img { width: 24px; height: 16px; border-radius: 2px; }
+.enquiry-phone-error { display: block; margin-top: 4px; color: #fda4af; font-size: .72rem; line-height: 1.35; font-weight: 700; }
+.enquiry-phone-error[hidden] { display: none; }
 .enquiry-popup .enquiry-privacy { color: #64748b; }
 .enquiry-popup .enquiry-phone-help { color: #64748b; }
+.enquiry-popup .enquiry-phone-error { color: #be123c; }
+.enquiry-popup .enquiry-dial-code { border-color: #e2e4eb; background: #eef2ff; color: #334155; }
+.enquiry-popup #batchInquiryForm .enquiry-phone-field input { border-top-left-radius: 0; border-bottom-left-radius: 0; }
+#studentPhone[aria-invalid="true"] { border-color: #f43f5e; box-shadow: 0 0 0 1px #f43f5e; }
 .enquiry-another { min-height: 44px; padding: 8px 16px; border: 1px solid currentColor; border-radius: 10px; color: inherit; font-size: .875rem; font-weight: 700; }
 #batchInquiryForm.is-submitted .grid, #batchInquiryForm.is-submitted .enquiry-actions, #batchInquiryForm.is-submitted .enquiry-privacy { display: none; }
 #batchInquiryForm.is-submitted .enquiry-status { margin-top: 0; }
 #batchInquiryForm.is-submitted .enquiry-another { display: flex; align-items: center; justify-content: center; width: fit-content; margin-left: auto; margin-right: auto; }
 #batchInquiryForm button:disabled { opacity: .65; cursor: wait; }
+#batchInquiryForm .enquiry-actions button.is-sending { animation: enquiry-submit-pulse .85s ease-in-out infinite; }
+#batchInquiryForm .enquiry-actions button.is-sending::before { content: ''; width: 15px; height: 15px; flex: none; margin-right: 8px; border: 2px solid currentColor; border-right-color: transparent; border-radius: 50%; animation: enquiry-submit-spin .7s linear infinite; }
+.enquiry-status[data-state="success"] { animation: enquiry-confirm-in .3s ease-out both; }
+.enquiry-status[data-state="success"]::before { content: '✓'; display: grid; place-items: center; width: 32px; height: 32px; margin: 0 auto 8px; border-radius: 50%; background: #10b981; color: #fff; font-size: 1rem; }
+@keyframes enquiry-submit-pulse { 50% { opacity: .72; box-shadow: 0 0 0 5px #10b98133; } }
+@keyframes enquiry-submit-spin { to { transform: rotate(360deg); } }
+@keyframes enquiry-confirm-in { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+@media (prefers-reduced-motion: reduce) { #batchInquiryForm .enquiry-actions button.is-sending, #batchInquiryForm .enquiry-actions button.is-sending::before, .enquiry-status[data-state="success"] { animation: none; } }
+
+.footer-layout { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 20px; }
+.footer-layout > p { justify-self: end; }
+.footer-community { display: flex; align-items: center; gap: 12px; padding: 8px 12px; border: 1px solid #334155; border-radius: 16px; background: #111c31; color: #f8fafc; }
+.footer-community img { width: 88px; height: auto; padding: 4px; border-radius: 8px; background: #fff; }
+.footer-community strong, .footer-community span { display: block; }
+.footer-community strong { font-size: .8rem; }
+.footer-community span { margin-top: 3px; color: #cbd5e1; font-size: .72rem; line-height: 1.4; }
+.footer-community span a { color: #86efac; text-decoration: underline; text-underline-offset: 2px; }
+@media (max-width: 767px) { .footer-layout { grid-template-columns: 1fr; justify-items: center; text-align: center; } .footer-layout > p { justify-self: center; } }
 /* Compact captions overlay the illustration without adding height to the card. */
 #heroSection .hero-photo img { height: auto; aspect-ratio: 3 / 2; object-position: center; }
 .hero-image-caption { position: absolute; top: 12px; left: 12px; max-width: calc(100% - 24px); padding: 6px 10px; border: 1px solid #ffffffb3; border-radius: 999px; background: #fffffff2; color: #334155; font-size: 11px; line-height: 1.5; font-weight: 600; }

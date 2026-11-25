@@ -4,16 +4,49 @@
   const button = form.querySelector('[type="submit"]');
   const name = document.getElementById('studentName');
   const phone = document.getElementById('studentPhone');
+  const phoneError = document.getElementById('phoneError');
   const anotherButton = document.getElementById('anotherEnquiry');
   let sending = false;
   name.addEventListener('input', () => name.setCustomValidity(''));
-  function validatePhone() {
-    const value = phone.value.trim();
-    const compact = value.replace(/[\s-]/g, '');
-    const valid = /^(?:\+91|91)?[6-9]\d{9}$/.test(compact);
-    phone.setCustomValidity(!value ? '' : valid ? '' : 'Enter a 10-digit Indian mobile number, with optional +91.');
+  function showPhoneError(message) {
+    phone.setCustomValidity(message);
+    phone.setAttribute('aria-invalid', 'true');
+    phoneError.textContent = message;
+    phoneError.hidden = false;
   }
-  phone.addEventListener('input', validatePhone);
+  function validatePhone(showIncomplete = false) {
+    const value = phone.value.trim();
+    const valid = /^[6-9]\d{9}$/.test(value);
+    const showError = Boolean(value && !valid && (showIncomplete || value.length >= 10));
+    phone.setCustomValidity(!value || valid ? '' : 'Enter a valid 10-digit Indian mobile number.');
+    phone.setAttribute('aria-invalid', String(showError));
+    phoneError.hidden = !showError;
+    phoneError.textContent = 'Enter a valid 10-digit Indian mobile number.';
+  }
+  phone.addEventListener('input', () => {
+    const digits = phone.value.replace(/\D/g, '');
+    const local = digits.length === 12 && digits.startsWith('91') ? digits.slice(2) : digits;
+    if (local.length > 10) {
+      phone.value = '';
+      showPhoneError('Enter only the 10 digits after +91.');
+      return;
+    }
+    phone.value = local;
+    validatePhone();
+  });
+  phone.addEventListener('paste', event => {
+    const digits = (event.clipboardData?.getData('text') || '').replace(/\D/g, '');
+    const local = digits.length === 12 && digits.startsWith('91') ? digits.slice(2) : digits;
+    event.preventDefault();
+    if (!/^[6-9]\d{9}$/.test(local)) {
+      showPhoneError('Paste a valid 10-digit Indian mobile number.');
+      return;
+    }
+    phone.value = local;
+    validatePhone();
+  });
+  phone.addEventListener('blur', () => validatePhone(true));
+  phone.addEventListener('invalid', () => validatePhone(true));
   function showStatus(message, state) {
     status.hidden = false;
     status.dataset.state = state;
@@ -23,7 +56,7 @@
     event.preventDefault();
     if (sending) return;
     name.setCustomValidity(name.value.trim() ? '' : 'Please enter your name.');
-    validatePhone();
+    validatePhone(true);
     if (!form.reportValidity()) return;
     // Netlify removes this attribute when registering the deployed form.
     if (form.hasAttribute('data-netlify')) {
@@ -32,11 +65,13 @@
     }
     const data = new FormData(form);
     data.set('name', name.value.trim());
+    data.set('phone', '+91' + phone.value);
     sending = true;
     button.disabled = true;
     button.textContent = 'Submitting…';
+    button.classList.add('is-sending');
     form.setAttribute('aria-busy', 'true');
-    showStatus('Sending your enquiry…', 'pending');
+    status.hidden = true;
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), 20000);
     try {
@@ -49,6 +84,8 @@
       if (!response.ok) throw new Error('Submission rejected');
       form.reset();
       phone.setCustomValidity('');
+      phone.setAttribute('aria-invalid', 'false');
+      phoneError.hidden = true;
       form.classList.add('is-submitted');
       anotherButton.hidden = false;
       showStatus('Thank you! Your enquiry has been received.\nOur team will get back to you soon.', 'success');
@@ -63,6 +100,7 @@
       sending = false;
       button.disabled = false;
       button.textContent = 'Submit Enquiry';
+      button.classList.remove('is-sending');
       form.removeAttribute('aria-busy');
     }
   });
