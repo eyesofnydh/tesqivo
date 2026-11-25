@@ -304,7 +304,6 @@ header a.brand-lockup { display: flex; flex-direction: column; gap: 0; }
 .enquiry-status[data-state="error"] { background: #fff1f2; color: #9f1239; }
 #batchInquiryForm label[for]::after { content: ' *'; color: #fb7185; }
 .enquiry-privacy { font-size: .875rem; line-height: 1.6; color: #cbd5e1; }
-.enquiry-phone-help { display: block; margin-top: 4px; font-size: .72rem; line-height: 1.35; color: #cbd5e1; }
 .enquiry-phone-field { display: flex; align-items: stretch; min-width: 0; border-radius: 12px; }
 .enquiry-phone-field input { flex: 1; min-width: 0; border-top-left-radius: 0; border-bottom-left-radius: 0; }
 .enquiry-dial-code { display: inline-flex; align-items: center; justify-content: center; gap: 5px; flex-shrink: 0; min-width: 80px; padding: 0 8px; border: 1px solid #475569; border-right: 0; border-radius: 12px 0 0 12px; background: #1e293b; color: #fff; font-size: .85rem; font-weight: 800; }
@@ -312,7 +311,6 @@ header a.brand-lockup { display: flex; flex-direction: column; gap: 0; }
 .enquiry-phone-error { display: block; margin-top: 4px; color: #fda4af; font-size: .72rem; line-height: 1.35; font-weight: 700; }
 .enquiry-phone-error[hidden] { display: none; }
 .enquiry-popup .enquiry-privacy { color: #64748b; }
-.enquiry-popup .enquiry-phone-help { color: #64748b; }
 .enquiry-popup .enquiry-phone-error { color: #be123c; }
 .enquiry-popup .enquiry-dial-code { border-color: #e2e4eb; background: #eef2ff; color: #334155; }
 .enquiry-popup #batchInquiryForm .enquiry-phone-field input { border-top-left-radius: 0; border-bottom-left-radius: 0; }
